@@ -57,10 +57,7 @@ map' :: (a -> b) -> [a] -> [b]
 map' f = foldr (\elm memo -> f elm : memo) []
 
 foldl' :: (a -> b -> a) -> a -> [b] -> a
-foldl' iter initial xs = foldr (nextStepFn iter) id xs $ initial
-  where
-    nextStepFn :: (a -> b -> a) -> b -> (a -> a) -> (a -> a)
-    nextStepFn iter item f = f . (flip iter item)
+foldl' f x xs= foldr (flip f) x $ reverse xs
 
 sieveOfSundaram :: Integer -> [Integer]
 sieveOfSundaram n =
